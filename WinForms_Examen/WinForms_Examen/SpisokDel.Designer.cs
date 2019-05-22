@@ -49,7 +49,6 @@
             this.checkedListBox1.TabIndex = 0;
             this.checkedListBox1.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBox1_ItemCheck);
             this.checkedListBox1.SelectedIndexChanged += new System.EventHandler(this.checkedListBox1_SelectedIndexChanged);
-            this.checkedListBox1.DoubleClick += new System.EventHandler(this.checkedListBox1_DoubleClick);
             // 
             // listBox1
             // 
@@ -120,14 +119,14 @@
             // 
             this.redactToolStripMenuItem.Name = "redactToolStripMenuItem";
             this.redactToolStripMenuItem.Size = new System.Drawing.Size(99, 20);
-            this.redactToolStripMenuItem.Text = "Редактировать";
+            this.redactToolStripMenuItem.Text = "&Редактировать";
             this.redactToolStripMenuItem.Click += new System.EventHandler(this.redactToolStripMenuItem_Click);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
             this.deleteToolStripMenuItem.Size = new System.Drawing.Size(63, 20);
-            this.deleteToolStripMenuItem.Text = "Удалить";
+            this.deleteToolStripMenuItem.Text = "&Удалить";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
             // SpisokDel

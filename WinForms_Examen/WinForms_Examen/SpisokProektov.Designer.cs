@@ -45,7 +45,6 @@
             this.lsbProekti.Size = new System.Drawing.Size(259, 95);
             this.lsbProekti.TabIndex = 0;
             this.lsbProekti.SelectedIndexChanged += new System.EventHandler(this.lsbProekti_SelectedIndexChanged);
-            this.lsbProekti.DoubleClick += new System.EventHandler(this.lsbProekti_DoubleClick);
             // 
             // clbDela
             // 
@@ -56,7 +55,6 @@
             this.clbDela.TabIndex = 1;
             this.clbDela.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.clbDela_ItemCheck);
             this.clbDela.SelectedIndexChanged += new System.EventHandler(this.clbDela_SelectedIndexChanged);
-            this.clbDela.DoubleClick += new System.EventHandler(this.clbDela_DoubleClick);
             // 
             // lsbSvojstva
             // 
@@ -81,14 +79,14 @@
             // 
             this.редактироватьToolStripMenuItem.Name = "редактироватьToolStripMenuItem";
             this.редактироватьToolStripMenuItem.Size = new System.Drawing.Size(99, 20);
-            this.редактироватьToolStripMenuItem.Text = "Редактировать";
+            this.редактироватьToolStripMenuItem.Text = "&Редактировать";
             this.редактироватьToolStripMenuItem.Click += new System.EventHandler(this.redactToolStripMenuItem_Click);
             // 
             // удалитьToolStripMenuItem
             // 
             this.удалитьToolStripMenuItem.Name = "удалитьToolStripMenuItem";
             this.удалитьToolStripMenuItem.Size = new System.Drawing.Size(63, 20);
-            this.удалитьToolStripMenuItem.Text = "Удалить";
+            this.удалитьToolStripMenuItem.Text = "&Удалить";
             this.удалитьToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
             // SpisokProektov

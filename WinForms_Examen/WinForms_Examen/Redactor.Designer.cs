@@ -227,6 +227,9 @@
             this.lsbSpisokDel.Size = new System.Drawing.Size(245, 147);
             this.lsbSpisokDel.TabIndex = 18;
             this.lsbSpisokDel.SelectedIndexChanged += new System.EventHandler(this.lsbSpisokDel_SelectedIndexChanged);
+            this.lsbSpisokDel.DragDrop += new System.Windows.Forms.DragEventHandler(this.lsbSpisokDel_DragDrop);
+            this.lsbSpisokDel.DragEnter += new System.Windows.Forms.DragEventHandler(this.lsbSpisokDel_DragEnter);
+            this.lsbSpisokDel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lsbSpisokDel_MouseDown);
             // 
             // btnAddDelo
             // 
@@ -253,14 +256,14 @@
             // 
             this.redactToolStripMenuItem.Name = "redactToolStripMenuItem";
             this.redactToolStripMenuItem.Size = new System.Drawing.Size(99, 20);
-            this.redactToolStripMenuItem.Text = "Редактировать";
+            this.redactToolStripMenuItem.Text = "&Редактировать";
             this.redactToolStripMenuItem.Click += new System.EventHandler(this.redactToolStripMenuItem_Click);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
             this.deleteToolStripMenuItem.Size = new System.Drawing.Size(63, 20);
-            this.deleteToolStripMenuItem.Text = "Удалить";
+            this.deleteToolStripMenuItem.Text = "&Удалить";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
             // Redactor

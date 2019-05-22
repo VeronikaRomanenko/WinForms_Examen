@@ -20,16 +20,21 @@ namespace WinForms_Examen
             {
                 lsbProekti.Items.Add(item.Name);
             }
+            clbDela.AllowDrop = true;
         }
 
         private void lsbProekti_SelectedIndexChanged(object sender, EventArgs e)
         {
             clbDela.Items.Clear();
+            lsbSvojstva.Items.Clear();
+            if (lsbProekti.SelectedIndex == -1)
+            {
+                return;
+            }
             foreach (Delo item in (this.MdiParent as Form1).proekti[lsbProekti.SelectedIndex].dela)
             {
                 clbDela.Items.Add(item.Name);
             }
-            lsbSvojstva.Items.Clear();
             Proekt tmp = (this.MdiParent as Form1).proekti[lsbProekti.SelectedIndex];
             lsbSvojstva.Items.Add("Описание: " + tmp.Opisanie);
             if (tmp.Dedline.Year != 0001)
@@ -103,26 +108,6 @@ namespace WinForms_Examen
             }
         }
 
-        private void lsbProekti_DoubleClick(object sender, EventArgs e)
-        {
-            Redactor form = new Redactor(false);
-            if (form.ShowDialog() == DialogResult.OK)
-            {
-                lsbProekti.SelectedItem = form.proek.Name;
-                (this.MdiParent as Form1).proekti[lsbProekti.SelectedIndex] = form.proek;
-            }
-        }
-
-        private void clbDela_DoubleClick(object sender, EventArgs e)
-        {
-            Redactor form = new Redactor(true);
-            if (form.ShowDialog() == DialogResult.OK)
-            {
-                clbDela.SelectedItem = form.del.Name;
-                (this.MdiParent as Form1).proekti[lsbProekti.SelectedIndex].dela[clbDela.SelectedIndex] = form.del;
-            }
-        }
-
         private void redactToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (lsbProekti.SelectedIndex != -1)
@@ -132,13 +117,18 @@ namespace WinForms_Examen
                 {
                     lsbProekti.Items[lsbProekti.SelectedIndex] = form.proek.Name;
                     (this.MdiParent as Form1).proekti[lsbProekti.SelectedIndex] = form.proek;
+                    lsbProekti.SelectedIndex = -1;
                 }
             }
         }
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            if (lsbProekti.SelectedIndex != -1)
+            {
+                (this.MdiParent as Form1).proekti.RemoveAt(lsbProekti.SelectedIndex);
+                lsbProekti.Items.RemoveAt(lsbProekti.SelectedIndex);
+            }
         }
     }
 }

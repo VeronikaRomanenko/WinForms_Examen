@@ -146,16 +146,6 @@ namespace WinForms_Examen
             }
         }
 
-        private void checkedListBox1_DoubleClick(object sender, EventArgs e)
-        {
-            Redactor form = new Redactor(true);
-            if (form.ShowDialog() == DialogResult.OK)
-            {
-                checkedListBox1.SelectedItem = form.del.Name;
-                (this.MdiParent as Form1).dela[checkedListBox1.SelectedIndex] = form.del;
-            }
-        }
-
         private void rdbAll_CheckedChanged(object sender, EventArgs e)
         {
             if (rdbAll.Checked)
@@ -182,8 +172,8 @@ namespace WinForms_Examen
                 Redactor form = new Redactor((this.MdiParent as Form1).dela[checkedListBox1.SelectedIndex]);
                 if (form.ShowDialog() == DialogResult.OK)
                 {
-                    checkedListBox1.Items[checkedListBox1.SelectedIndex] = form.del.Name;
                     (this.MdiParent as Form1).dela[checkedListBox1.SelectedIndex] = form.del;
+                    checkedListBox1.Items[checkedListBox1.SelectedIndex] = form.del.Name;
                 }
             }
         }

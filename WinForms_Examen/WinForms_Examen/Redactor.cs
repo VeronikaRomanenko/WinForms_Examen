@@ -34,6 +34,7 @@ namespace WinForms_Examen
                 chbAddFile.Visible = false;
                 txbFile.Visible = false;
                 dels = new List<Delo>();
+                lsbSpisokDel.AllowDrop = true;
             }
             cmbPrioritet.Items.Add("Высокий");
             cmbPrioritet.Items.Add("Средний");
@@ -75,13 +76,13 @@ namespace WinForms_Examen
 
         public Redactor(Proekt proekt) : this(false)
         {
-            txbName.Text = del.Name;
-            txbOpisanie.Text = del.Opisanie;
-            if (del.prioritet == Prioritet.Visokij)
+            txbName.Text = proekt.Name;
+            txbOpisanie.Text = proekt.Opisanie;
+            if (proekt.prioritet == Prioritet.Visokij)
             {
                 cmbPrioritet.SelectedIndex = 0;
             }
-            else if (del.prioritet == Prioritet.Srednij)
+            else if (proekt.prioritet == Prioritet.Srednij)
             {
                 cmbPrioritet.SelectedIndex = 1;
             }
@@ -89,14 +90,14 @@ namespace WinForms_Examen
             {
                 cmbPrioritet.SelectedIndex = 2;
             }
-            foreach (string item in del.tegi)
+            foreach (string item in proekt.tegi)
             {
                 lsbTegi.Items.Add(item);
             }
-            if (del.Dedline.Year != 0001)
+            if (proekt.Dedline.Year != 0001)
             {
                 chbAddDedline.Checked = true;
-                dtpDedline.Value = del.Dedline;
+                dtpDedline.Value = proekt.Dedline;
             }
             foreach (Delo item in proekt.dela)
             {
@@ -288,6 +289,30 @@ namespace WinForms_Examen
             else if (lsbTegi.SelectedIndex != -1)
             {
                 lsbTegi.Items.RemoveAt(lsbTegi.SelectedIndex);
+            }
+        }
+
+        private void lsbSpisokDel_MouseDown(object sender, MouseEventArgs e)
+        {
+            Delo d = dels[lsbSpisokDel.SelectedIndex];
+            //lsbSpisokDel.DoDragDrop(, DragDropEffects.Copy);
+        }
+
+        private void lsbSpisokDel_DragDrop(object sender, DragEventArgs e)
+        {
+            Delo d = e.Data.GetData(DataFormats.StringFormat) as Delo;
+            MessageBox.Show(d.Name);
+        }
+
+        private void lsbSpisokDel_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.StringFormat))
+            {
+                e.Effect = DragDropEffects.Copy;
+            }
+            else
+            {
+                e.Effect = DragDropEffects.None;
             }
         }
     }

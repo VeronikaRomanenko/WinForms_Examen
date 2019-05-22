@@ -24,6 +24,10 @@ namespace WinForms_Examen
                 clbDela.Location = lsbProekti.Location;
                 Size = new Size(Size.Width, Size.Height - lsbProekti.Height);
             }
+            else
+            {
+                clbDela.AllowDrop = true;
+            }
             cmbPrioritet.Items.Add("Высокий");
             cmbPrioritet.Items.Add("Средний");
             cmbPrioritet.Items.Add("Низкий");
@@ -104,7 +108,7 @@ namespace WinForms_Examen
                     {
                         if (item.Name == txbPoisk.Text)
                         {
-                            clbDela.Items.Add(item.Name);
+                            lsbProekti.Items.Add(item.Name);
                         }
                     }
                     else if (rdbPoTeg.Checked)
@@ -113,7 +117,7 @@ namespace WinForms_Examen
                         {
                             if (teg == txbPoisk.Text)
                             {
-                                clbDela.Items.Add(item.Name);
+                                lsbProekti.Items.Add(item.Name);
                             }
                         }
                     }
@@ -138,7 +142,7 @@ namespace WinForms_Examen
                         }
                         if (item.prioritet == prior)
                         {
-                            clbDela.Items.Add(item.Name);
+                            lsbProekti.Items.Add(item.Name);
                         }
                     }
                 }
@@ -148,14 +152,18 @@ namespace WinForms_Examen
         private void lsbProekti_SelectedIndexChanged(object sender, EventArgs e)
         {
             clbDela.Items.Clear();
+            lsbSvojstva.Items.Clear();
+            if (lsbProekti.SelectedIndex == -1)
+            {
+                return;
+            }
             foreach (Delo item in (this.MdiParent as Form1).proekti.Find(x => x.Name == lsbProekti.SelectedItem.ToString()).dela)
             {
                 clbDela.Items.Add(item.Name);
             }
-            lsbSvojstva.Items.Clear();
             Proekt tmp = (this.MdiParent as Form1).proekti.Find(x => x.Name == lsbProekti.SelectedItem.ToString());
             lsbSvojstva.Items.Add("Описание: " + tmp.Opisanie);
-            if (tmp.Dedline != null)
+            if (tmp.Dedline.Year != 0001)
             {
                 lsbSvojstva.Items.Add("Дедлайн: " + tmp.Dedline.ToLongDateString() + ", " + tmp.Dedline.ToLongTimeString());
             }
@@ -180,19 +188,13 @@ namespace WinForms_Examen
             }
         }
 
-        private void lsbProekti_DoubleClick(object sender, EventArgs e)
-        {
-            Redactor form = new Redactor(false);
-            if (form.ShowDialog() == DialogResult.OK)
-            {
-                (this.MdiParent as Form1).proekti[(this.MdiParent as Form1).proekti.FindIndex(x => x.Name == lsbProekti.SelectedItem.ToString())] = form.proek;
-                lsbProekti.SelectedItem = form.proek.Name;
-            }
-        }
-
         private void clbDela_SelectedIndexChanged(object sender, EventArgs e)
         {
             lsbSvojstva.Items.Clear();
+            if (clbDela.SelectedIndex == -1)
+            {
+                return;
+            }
             Delo tmp = null;
             if (is_delo)
             {
@@ -232,26 +234,6 @@ namespace WinForms_Examen
             }
         }
 
-        private void clbDela_DoubleClick(object sender, EventArgs e)
-        {
-            Redactor form = new Redactor(true);
-            if (form.ShowDialog() == DialogResult.OK)
-            {
-                if (is_delo)
-                {
-                    int index = (this.MdiParent as Form1).dela.FindIndex(x => x.Name == clbDela.SelectedItem.ToString());
-                    (this.MdiParent as Form1).dela[index] = form.del;
-                }
-                else
-                {
-                    int index1 = (this.MdiParent as Form1).proekti.FindIndex(x => x.Name == lsbProekti.SelectedItem.ToString());
-                    int index2 = (this.MdiParent as Form1).proekti[index1].dela.FindIndex(x => x.Name == clbDela.SelectedItem.ToString());
-                    (this.MdiParent as Form1).proekti[index1].dela[index2] = form.del;
-                }
-                clbDela.SelectedItem = form.del.Name;
-            }
-        }
-
         private void clbDela_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             int index1 = 0, index2 = 0;
@@ -277,6 +259,55 @@ namespace WinForms_Examen
                     (this.MdiParent as Form1).proekti[index1].dela[index2].Vipolneno = false;
                 else
                     (this.MdiParent as Form1).dela[index1].Vipolneno = false;
+            }
+        }
+
+        private void redactToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (is_delo)
+            {
+                if (clbDela.SelectedIndex != -1)
+                {
+                    Redactor form = new Redactor((this.MdiParent as Form1).dela[clbDela.SelectedIndex]);
+                    if (form.ShowDialog() == DialogResult.OK)
+                    {
+                        (this.MdiParent as Form1).dela[clbDela.SelectedIndex] = form.del;
+                        clbDela.Items[clbDela.SelectedIndex] = form.del.Name;
+                    }
+                }
+            }
+            else
+            {
+                if (lsbProekti.SelectedIndex != -1)
+                {
+                    Redactor form = new Redactor((this.MdiParent as Form1).proekti[lsbProekti.SelectedIndex]);
+                    if (form.ShowDialog() == DialogResult.OK)
+                    {
+                        (this.MdiParent as Form1).proekti[lsbProekti.SelectedIndex] = form.proek;
+                        lsbProekti.Items[lsbProekti.SelectedIndex] = form.proek.Name;
+                        lsbProekti.SelectedIndex = -1;
+                    }
+                }
+            }
+        }
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (is_delo)
+            {
+                if (clbDela.SelectedIndex != -1)
+                {
+                    (this.MdiParent as Form1).dela.RemoveAt(clbDela.SelectedIndex);
+                    clbDela.Items.RemoveAt(clbDela.SelectedIndex);
+                }
+            }
+            else
+            {
+                if (lsbProekti.SelectedIndex != -1)
+                {
+                    (this.MdiParent as Form1).proekti.RemoveAt(lsbProekti.SelectedIndex);
+                    lsbProekti.Items.RemoveAt(lsbProekti.SelectedIndex);
+                }
             }
         }
     }
