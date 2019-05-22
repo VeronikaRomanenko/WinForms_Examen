@@ -33,6 +33,10 @@ namespace WinForms_Examen
         private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             listBox1.Items.Clear();
+            if (checkedListBox1.SelectedIndex == -1)
+            {
+                return;
+            }
             Delo tmp = form1.dela[checkedListBox1.SelectedIndex];
             listBox1.Items.Add("Описание: " + tmp.Opisanie);
             if (tmp.Dedline.Year != 0001)
@@ -168,6 +172,28 @@ namespace WinForms_Examen
                         checkedListBox1.Items.Add(item.Name);
                     }
                 }
+            }
+        }
+
+        private void redactToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (checkedListBox1.SelectedIndex != -1)
+            {
+                Redactor form = new Redactor((this.MdiParent as Form1).dela[checkedListBox1.SelectedIndex]);
+                if (form.ShowDialog() == DialogResult.OK)
+                {
+                    checkedListBox1.Items[checkedListBox1.SelectedIndex] = form.del.Name;
+                    (this.MdiParent as Form1).dela[checkedListBox1.SelectedIndex] = form.del;
+                }
+            }
+        }
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (checkedListBox1.SelectedIndex != -1)
+            {
+                (this.MdiParent as Form1).dela.RemoveAt(checkedListBox1.SelectedIndex);
+                checkedListBox1.Items.RemoveAt(checkedListBox1.SelectedIndex);
             }
         }
     }

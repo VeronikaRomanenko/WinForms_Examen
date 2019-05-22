@@ -51,7 +51,7 @@ namespace WinForms_Examen
 
         private void spisokProektovToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SpisokProektov form = new SpisokProektov();
+            SpisokProektov form = new SpisokProektov(this);
             form.MdiParent = this;
             form.Show();
         }

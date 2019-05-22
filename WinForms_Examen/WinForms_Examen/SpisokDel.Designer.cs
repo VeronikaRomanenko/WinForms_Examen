@@ -34,6 +34,10 @@
             this.rdbDen = new System.Windows.Forms.RadioButton();
             this.rdbNedela = new System.Windows.Forms.RadioButton();
             this.rdbMesaz = new System.Windows.Forms.RadioButton();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.redactToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // checkedListBox1
@@ -101,6 +105,31 @@
             this.rdbMesaz.UseVisualStyleBackColor = true;
             this.rdbMesaz.CheckedChanged += new System.EventHandler(this.rdbMesaz_CheckedChanged);
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.redactToolStripMenuItem,
+            this.deleteToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(284, 24);
+            this.menuStrip1.TabIndex = 6;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // redactToolStripMenuItem
+            // 
+            this.redactToolStripMenuItem.Name = "redactToolStripMenuItem";
+            this.redactToolStripMenuItem.Size = new System.Drawing.Size(99, 20);
+            this.redactToolStripMenuItem.Text = "Редактировать";
+            this.redactToolStripMenuItem.Click += new System.EventHandler(this.redactToolStripMenuItem_Click);
+            // 
+            // deleteToolStripMenuItem
+            // 
+            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(63, 20);
+            this.deleteToolStripMenuItem.Text = "Удалить";
+            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
+            // 
             // SpisokDel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -112,8 +141,12 @@
             this.Controls.Add(this.rdbAll);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.checkedListBox1);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "SpisokDel";
             this.Text = "SpisokDel";
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -127,5 +160,8 @@
         private System.Windows.Forms.RadioButton rdbDen;
         private System.Windows.Forms.RadioButton rdbNedela;
         private System.Windows.Forms.RadioButton rdbMesaz;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem redactToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
     }
 }

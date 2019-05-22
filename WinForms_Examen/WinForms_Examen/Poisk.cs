@@ -27,6 +27,7 @@ namespace WinForms_Examen
             cmbPrioritet.Items.Add("Высокий");
             cmbPrioritet.Items.Add("Средний");
             cmbPrioritet.Items.Add("Низкий");
+            cmbPrioritet.SelectedIndex = 0;
         }
 
         private void rdbPoPrioritet_CheckedChanged(object sender, EventArgs e)
@@ -45,10 +46,9 @@ namespace WinForms_Examen
 
         private void btnPoisk_Click(object sender, EventArgs e)
         {
-            if (txbPoisk.Text == "")
-            {
-                return;
-            }
+            lsbProekti.Items.Clear();
+            clbDela.Items.Clear();
+            lsbSvojstva.Items.Clear();
             if (is_delo)
             {
                 foreach (Delo item in (this.MdiParent as Form1).dela)
@@ -81,9 +81,13 @@ namespace WinForms_Examen
                         {
                             prior = Prioritet.Srednij;
                         }
-                        else
+                        else if (cmbPrioritet.SelectedItem.ToString() == "Низкий")
                         {
                             prior = Prioritet.Nizkij;
+                        }
+                        else
+                        {
+                            return;
                         }
                         if (item.prioritet == prior)
                         {
@@ -124,9 +128,13 @@ namespace WinForms_Examen
                         {
                             prior = Prioritet.Srednij;
                         }
-                        else
+                        else if (cmbPrioritet.SelectedItem.ToString() == "Низкий")
                         {
                             prior = Prioritet.Nizkij;
+                        }
+                        else
+                        {
+                            return;
                         }
                         if (item.prioritet == prior)
                         {
@@ -195,7 +203,7 @@ namespace WinForms_Examen
                 tmp = (this.MdiParent as Form1).proekti.Find(x => x.Name == lsbProekti.SelectedItem.ToString()).dela.Find(x => x.Name == clbDela.SelectedItem.ToString());
             }
             lsbSvojstva.Items.Add("Описание: " + tmp.Opisanie);
-            if (tmp.Dedline != null)
+            if (tmp.Dedline.Year != 0001)
             {
                 lsbSvojstva.Items.Add("Дедлайн: " + tmp.Dedline.ToLongDateString() + ", " + tmp.Dedline.ToLongTimeString());
             }
@@ -258,14 +266,14 @@ namespace WinForms_Examen
             }
             if (e.CurrentValue == CheckState.Checked)
             {
-                if (is_delo)
+                if (!is_delo)
                     (this.MdiParent as Form1).proekti[index1].dela[index2].Vipolneno = true;
                 else
                     (this.MdiParent as Form1).dela[index1].Vipolneno = true;
             }
             else
             {
-                if (is_delo)
+                if (!is_delo)
                     (this.MdiParent as Form1).proekti[index1].dela[index2].Vipolneno = false;
                 else
                     (this.MdiParent as Form1).dela[index1].Vipolneno = false;

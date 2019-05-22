@@ -122,10 +122,11 @@
             // cmbPrioritet
             // 
             this.cmbPrioritet.FormattingEnabled = true;
-            this.cmbPrioritet.Location = new System.Drawing.Point(13, 13);
+            this.cmbPrioritet.Location = new System.Drawing.Point(14, 12);
             this.cmbPrioritet.Name = "cmbPrioritet";
             this.cmbPrioritet.Size = new System.Drawing.Size(283, 21);
             this.cmbPrioritet.TabIndex = 9;
+            this.cmbPrioritet.Visible = false;
             // 
             // Poisk
             // 

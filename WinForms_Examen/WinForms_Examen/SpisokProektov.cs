@@ -12,10 +12,11 @@ namespace WinForms_Examen
 {
     public partial class SpisokProektov : Form
     {
-        public SpisokProektov()
+        public SpisokProektov(Form1 form1)
         {
             InitializeComponent();
-            foreach (Proekt item in (this.MdiParent as Form1).proekti)
+            Form1 form = form1;
+            foreach (Proekt item in form.proekti)
             {
                 lsbProekti.Items.Add(item.Name);
             }
@@ -31,7 +32,7 @@ namespace WinForms_Examen
             lsbSvojstva.Items.Clear();
             Proekt tmp = (this.MdiParent as Form1).proekti[lsbProekti.SelectedIndex];
             lsbSvojstva.Items.Add("Описание: " + tmp.Opisanie);
-            if (tmp.Dedline != null)
+            if (tmp.Dedline.Year != 0001)
             {
                 lsbSvojstva.Items.Add("Дедлайн: " + tmp.Dedline.ToLongDateString() + ", " + tmp.Dedline.ToLongTimeString());
             }
@@ -73,7 +74,7 @@ namespace WinForms_Examen
             lsbSvojstva.Items.Clear();
             Delo tmp = (this.MdiParent as Form1).proekti[lsbProekti.SelectedIndex].dela[clbDela.SelectedIndex];
             lsbSvojstva.Items.Add("Описание: " + tmp.Opisanie);
-            if (tmp.Dedline != null)
+            if (tmp.Dedline.Year != 0001)
             {
                 lsbSvojstva.Items.Add("Дедлайн: " + tmp.Dedline.ToLongDateString() + ", " + tmp.Dedline.ToLongTimeString());
             }
@@ -120,6 +121,24 @@ namespace WinForms_Examen
                 clbDela.SelectedItem = form.del.Name;
                 (this.MdiParent as Form1).proekti[lsbProekti.SelectedIndex].dela[clbDela.SelectedIndex] = form.del;
             }
+        }
+
+        private void redactToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (lsbProekti.SelectedIndex != -1)
+            {
+                Redactor form = new Redactor((this.MdiParent as Form1).proekti[lsbProekti.SelectedIndex]);
+                if (form.ShowDialog() == DialogResult.OK)
+                {
+                    lsbProekti.Items[lsbProekti.SelectedIndex] = form.proek.Name;
+                    (this.MdiParent as Form1).proekti[lsbProekti.SelectedIndex] = form.proek;
+                }
+            }
+        }
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
