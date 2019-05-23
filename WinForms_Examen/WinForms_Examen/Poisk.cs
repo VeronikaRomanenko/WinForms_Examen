@@ -174,6 +174,13 @@ namespace WinForms_Examen
                 tegi += ", ";
             }
             lsbSvojstva.Items.Add("Теги: " + tegi);
+            string kontacti = "";
+            foreach (string item in tmp.kontacti)
+            {
+                kontacti += item;
+                kontacti += ", ";
+            }
+            lsbSvojstva.Items.Add("Контакты: " + kontacti);
             if (tmp.prioritet == Prioritet.Visokij)
             {
                 lsbSvojstva.Items.Add("Приоритет: Высокий");

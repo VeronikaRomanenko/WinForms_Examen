@@ -51,13 +51,17 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.redactToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lsbKontacti = new System.Windows.Forms.ListBox();
+            this.lblKontacti = new System.Windows.Forms.Label();
+            this.txbKontacti = new System.Windows.Forms.TextBox();
+            this.btnAddKontact = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnSave
             // 
             this.btnSave.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.btnSave.Location = new System.Drawing.Point(0, 493);
+            this.btnSave.Location = new System.Drawing.Point(0, 646);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(513, 50);
             this.btnSave.TabIndex = 0;
@@ -266,11 +270,49 @@
             this.deleteToolStripMenuItem.Text = "&Удалить";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
+            // lsbKontacti
+            // 
+            this.lsbKontacti.FormattingEnabled = true;
+            this.lsbKontacti.Location = new System.Drawing.Point(89, 493);
+            this.lsbKontacti.Name = "lsbKontacti";
+            this.lsbKontacti.Size = new System.Drawing.Size(199, 147);
+            this.lsbKontacti.TabIndex = 21;
+            // 
+            // lblKontacti
+            // 
+            this.lblKontacti.AutoSize = true;
+            this.lblKontacti.Location = new System.Drawing.Point(12, 493);
+            this.lblKontacti.Name = "lblKontacti";
+            this.lblKontacti.Size = new System.Drawing.Size(56, 13);
+            this.lblKontacti.TabIndex = 22;
+            this.lblKontacti.Text = "Контакты";
+            // 
+            // txbKontacti
+            // 
+            this.txbKontacti.Location = new System.Drawing.Point(294, 521);
+            this.txbKontacti.Name = "txbKontacti";
+            this.txbKontacti.Size = new System.Drawing.Size(207, 20);
+            this.txbKontacti.TabIndex = 24;
+            // 
+            // btnAddKontact
+            // 
+            this.btnAddKontact.Location = new System.Drawing.Point(294, 547);
+            this.btnAddKontact.Name = "btnAddKontact";
+            this.btnAddKontact.Size = new System.Drawing.Size(207, 35);
+            this.btnAddKontact.TabIndex = 23;
+            this.btnAddKontact.Text = "Добавить";
+            this.btnAddKontact.UseVisualStyleBackColor = true;
+            this.btnAddKontact.Click += new System.EventHandler(this.btnAddKontact_Click);
+            // 
             // Redactor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(513, 543);
+            this.ClientSize = new System.Drawing.Size(513, 696);
+            this.Controls.Add(this.txbKontacti);
+            this.Controls.Add(this.btnAddKontact);
+            this.Controls.Add(this.lblKontacti);
+            this.Controls.Add(this.lsbKontacti);
             this.Controls.Add(this.btnAddDelo);
             this.Controls.Add(this.lsbSpisokDel);
             this.Controls.Add(this.txbFile);
@@ -327,5 +369,9 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem redactToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
+        private System.Windows.Forms.ListBox lsbKontacti;
+        private System.Windows.Forms.Label lblKontacti;
+        private System.Windows.Forms.TextBox txbKontacti;
+        private System.Windows.Forms.Button btnAddKontact;
     }
 }

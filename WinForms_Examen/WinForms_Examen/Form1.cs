@@ -205,6 +205,11 @@ namespace WinForms_Examen
                     tmp += ", ";
                     tmp += str;
                 }
+                foreach (string str in item.kontacti)
+                {
+                    tmp += ", ";
+                    tmp += str;
+                }
                 tmp += ", приоритет - ";
                 if (item.prioritet == Prioritet.Visokij)
                     tmp += "высокий";
@@ -224,7 +229,6 @@ namespace WinForms_Examen
             }
             
             doc.Save("pdfFiles/Список дел.pdf");
-
         }
     }
 }

@@ -23,11 +23,15 @@ namespace WinForms_Examen
             this.is_delo = is_delo;
             if (is_delo)
             {
-                Size = new Size(Size.Width, Size.Height - 150);
+                Size = new Size(Size.Width, Size.Height - 300);
                 lblSpisokDel.Visible = false;
                 lsbSpisokDel.Visible = false;
                 btnAddDelo.Visible = false;
                 menuStrip1.Items[0].Visible = false;
+                lblKontacti.Visible = false;
+                lsbKontacti.Visible = false;
+                txbKontacti.Visible = false;
+                btnAddKontact.Visible = false;
             }
             else
             {
@@ -98,6 +102,10 @@ namespace WinForms_Examen
             foreach (string item in proekt.tegi)
             {
                 lsbTegi.Items.Add(item);
+            }
+            foreach (string item in proekt.kontacti)
+            {
+                lsbKontacti.Items.Add(item);
             }
             if (proekt.Dedline.Year != 0001)
             {
@@ -212,6 +220,11 @@ namespace WinForms_Examen
                 {
                     proekt.tegi.Add(item);
                 }
+                proekt.kontacti = new List<string>();
+                foreach (string item in lsbKontacti.Items)
+                {
+                    proekt.kontacti.Add(item);
+                }
                 if (cmbPrioritet.SelectedItem.ToString() == "Высокий")
                 {
                     proekt.prioritet = Prioritet.Visokij;
@@ -244,7 +257,7 @@ namespace WinForms_Examen
 
         private void btnAddTeg_Click(object sender, EventArgs e)
         {
-            if (txbTeg.Text.Length != 0)
+            if (txbTeg.Text != "")
             {
                 lsbTegi.Items.Add(txbTeg.Text);
                 txbTeg.Text = "";
@@ -306,16 +319,20 @@ namespace WinForms_Examen
 
         private void lsbSpisokDel_MouseDown(object sender, MouseEventArgs e)
         {
-            Delo d = dels[lsbSpisokDel.SelectedIndex];
-            d.Name = d.Name + "_1";
-            d.SaveToFile("Drag-and-Drop.txt");
-            lsbSpisokDel.DoDragDrop("Drag-and-Drop.txt", DragDropEffects.Copy);
+            if (lsbSpisokDel.SelectedIndex != -1)
+            {
+                Delo d = dels[lsbSpisokDel.SelectedIndex];
+                d.Name = d.Name;
+                d.SaveToFile("Drag-and-Drop.txt");
+                lsbSpisokDel.DoDragDrop("Drag-and-Drop.txt", DragDropEffects.Copy);
+            }
         }
 
         private void lsbSpisokDel_DragDrop(object sender, DragEventArgs e)
         {
             Delo d = new Delo();
             d.DownloadFromFile(e.Data.GetData(DataFormats.StringFormat).ToString());
+            d.Name = d.Name + "_1";
             lsbSpisokDel.Items.Add(d.Name);
             Form1.names.Add(d.Name);
             dels.Add(d);
@@ -332,6 +349,15 @@ namespace WinForms_Examen
             else
             {
                 e.Effect = DragDropEffects.None;
+            }
+        }
+
+        private void btnAddKontact_Click(object sender, EventArgs e)
+        {
+            if (txbKontacti.Text != "")
+            {
+                lsbKontacti.Items.Add(txbKontacti.Text);
+                txbKontacti.Text = "";
             }
         }
     }

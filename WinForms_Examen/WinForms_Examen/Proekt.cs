@@ -12,6 +12,7 @@ namespace WinForms_Examen
         public List<Delo> dela;
         public DateTime Dedline { set; get; }
         public List<string> tegi;
+        public List<string> kontacti;
         public Prioritet prioritet { set; get; }
         public void SaveToFiles()
         {
@@ -29,6 +30,13 @@ namespace WinForms_Examen
             tmp.Add(Dedline.ToLongDateString() + " " + Dedline.ToLongTimeString());
             str = "";
             foreach (string item in tegi)
+            {
+                str += item;
+                str += ";";
+            }
+            tmp.Add(str);
+            str = "";
+            foreach (string item in kontacti)
             {
                 str += item;
                 str += ";";
@@ -55,7 +63,8 @@ namespace WinForms_Examen
             }
             Dedline = DateTime.Parse(tmp[3]);
             tegi = new List<string>(tmp[4].Split(';'));
-            prioritet = (Prioritet)int.Parse(tmp[5]);
+            kontacti = new List<string>(tmp[4].Split(';'));
+            prioritet = (Prioritet)int.Parse(tmp[6]);
         }
     }
 }
