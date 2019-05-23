@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -44,6 +45,8 @@ namespace WinForms_Examen
 
         public Redactor(Delo delo) : this(true)
         {
+            this.ControlBox = false;
+            Form1.names.Remove(delo.Name);
             txbName.Text = delo.Name;
             txbOpisanie.Text = delo.Opisanie;
             if (delo.prioritet == Prioritet.Visokij)
@@ -76,6 +79,8 @@ namespace WinForms_Examen
 
         public Redactor(Proekt proekt) : this(false)
         {
+            this.ControlBox = false;
+            Form1.names.Remove(proekt.Name);
             txbName.Text = proekt.Name;
             txbOpisanie.Text = proekt.Opisanie;
             if (proekt.prioritet == Prioritet.Visokij)
@@ -136,6 +141,12 @@ namespace WinForms_Examen
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            if (Form1.names.IndexOf(txbName.Text) != -1)
+            {
+                MessageBox.Show("Имена дел и проектов не могут повторяться", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            Form1.names.Add(txbName.Text);
             if (is_delo)
             {
                 Delo delo = new Delo();
@@ -283,6 +294,7 @@ namespace WinForms_Examen
         {
             if (lsbSpisokDel.SelectedIndex != -1)
             {
+                Form1.names.Remove(dels[lsbSpisokDel.SelectedIndex].Name);
                 dels.RemoveAt(lsbSpisokDel.SelectedIndex);
                 lsbSpisokDel.Items.RemoveAt(lsbSpisokDel.SelectedIndex);
             }
@@ -295,18 +307,25 @@ namespace WinForms_Examen
         private void lsbSpisokDel_MouseDown(object sender, MouseEventArgs e)
         {
             Delo d = dels[lsbSpisokDel.SelectedIndex];
-            //lsbSpisokDel.DoDragDrop(, DragDropEffects.Copy);
+            d.Name = d.Name + "_1";
+            d.SaveToFile("Drag-and-Drop.txt");
+            lsbSpisokDel.DoDragDrop("Drag-and-Drop.txt", DragDropEffects.Copy);
         }
 
         private void lsbSpisokDel_DragDrop(object sender, DragEventArgs e)
         {
-            Delo d = e.Data.GetData(DataFormats.StringFormat) as Delo;
-            MessageBox.Show(d.Name);
+            Delo d = new Delo();
+            d.DownloadFromFile(e.Data.GetData(DataFormats.StringFormat).ToString());
+            lsbSpisokDel.Items.Add(d.Name);
+            Form1.names.Add(d.Name);
+            dels.Add(d);
+            File.Delete(e.Data.GetData(DataFormats.StringFormat).ToString());
         }
 
         private void lsbSpisokDel_DragEnter(object sender, DragEventArgs e)
         {
-            if (e.Data.GetDataPresent(DataFormats.StringFormat))
+            string[] tmp = File.ReadAllLines(e.Data.GetData(DataFormats.StringFormat).ToString());
+            if (e.Data.GetDataPresent(DataFormats.StringFormat) && lsbSpisokDel.Items.IndexOf(tmp[0]) == -1)
             {
                 e.Effect = DragDropEffects.Copy;
             }

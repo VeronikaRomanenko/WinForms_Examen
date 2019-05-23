@@ -297,6 +297,7 @@ namespace WinForms_Examen
             {
                 if (clbDela.SelectedIndex != -1)
                 {
+                    Form1.names.Remove((this.MdiParent as Form1).dela[clbDela.SelectedIndex].Name);
                     (this.MdiParent as Form1).dela.RemoveAt(clbDela.SelectedIndex);
                     clbDela.Items.RemoveAt(clbDela.SelectedIndex);
                 }

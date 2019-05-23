@@ -182,6 +182,7 @@ namespace WinForms_Examen
         {
             if (checkedListBox1.SelectedIndex != -1)
             {
+                Form1.names.Remove((this.MdiParent as Form1).dela[checkedListBox1.SelectedIndex].Name);
                 (this.MdiParent as Form1).dela.RemoveAt(checkedListBox1.SelectedIndex);
                 checkedListBox1.Items.RemoveAt(checkedListBox1.SelectedIndex);
             }

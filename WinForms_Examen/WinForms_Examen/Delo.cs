@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Windows.Forms;
 
 namespace WinForms_Examen
 {
@@ -27,7 +28,7 @@ namespace WinForms_Examen
             }
             tmp.Add(str);
             tmp.Add(FileName);
-            tmp.Add(prioritet.ToString());
+            tmp.Add(((int)prioritet).ToString());
             tmp.Add(Vipolneno.ToString());
             File.WriteAllLines(path, tmp);
         }
@@ -37,8 +38,10 @@ namespace WinForms_Examen
             Name = tmp[0];
             Opisanie = tmp[1];
             Dedline = DateTime.Parse(tmp[2]);
-
+            tegi = new List<string>(tmp[3].Split(';'));
             FileName = tmp[4];
+            prioritet = (Prioritet)int.Parse(tmp[5]);
+            Vipolneno = bool.Parse(tmp[6]);
         }
     }
 }

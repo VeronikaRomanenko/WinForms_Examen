@@ -126,6 +126,7 @@ namespace WinForms_Examen
         {
             if (lsbProekti.SelectedIndex != -1)
             {
+                Form1.names.Remove((this.MdiParent as Form1).proekti[lsbProekti.SelectedIndex].Name);
                 (this.MdiParent as Form1).proekti.RemoveAt(lsbProekti.SelectedIndex);
                 lsbProekti.Items.RemoveAt(lsbProekti.SelectedIndex);
             }
