@@ -38,6 +38,11 @@
             this.поискToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.делToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.проектовToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.видToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.каскадToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tileHorizontalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tileVerticalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.сохранитьВPdfToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -46,7 +51,9 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.создатьToolStripMenuItem,
             this.спискиToolStripMenuItem,
-            this.поискToolStripMenuItem});
+            this.поискToolStripMenuItem,
+            this.видToolStripMenuItem,
+            this.сохранитьВPdfToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1153, 24);
@@ -65,14 +72,14 @@
             // делоToolStripMenuItem
             // 
             this.делоToolStripMenuItem.Name = "делоToolStripMenuItem";
-            this.делоToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.делоToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.делоToolStripMenuItem.Text = "&Дело";
             this.делоToolStripMenuItem.Click += new System.EventHandler(this.newDeloToolStripMenuItem_Click);
             // 
             // проектToolStripMenuItem
             // 
             this.проектToolStripMenuItem.Name = "проектToolStripMenuItem";
-            this.проектToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.проектToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.проектToolStripMenuItem.Text = "&Проект";
             this.проектToolStripMenuItem.Click += new System.EventHandler(this.newProektToolStripMenuItem_Click);
             // 
@@ -122,6 +129,44 @@
             this.проектовToolStripMenuItem1.Text = "&Проектов";
             this.проектовToolStripMenuItem1.Click += new System.EventHandler(this.poiskProektovToolStripMenuItem_Click);
             // 
+            // видToolStripMenuItem
+            // 
+            this.видToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.каскадToolStripMenuItem,
+            this.tileHorizontalToolStripMenuItem,
+            this.tileVerticalToolStripMenuItem});
+            this.видToolStripMenuItem.Name = "видToolStripMenuItem";
+            this.видToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
+            this.видToolStripMenuItem.Text = "&Вид";
+            // 
+            // каскадToolStripMenuItem
+            // 
+            this.каскадToolStripMenuItem.Name = "каскадToolStripMenuItem";
+            this.каскадToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.каскадToolStripMenuItem.Text = "&Cascade";
+            this.каскадToolStripMenuItem.Click += new System.EventHandler(this.cascadeToolStripMenuItem_Click);
+            // 
+            // tileHorizontalToolStripMenuItem
+            // 
+            this.tileHorizontalToolStripMenuItem.Name = "tileHorizontalToolStripMenuItem";
+            this.tileHorizontalToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.tileHorizontalToolStripMenuItem.Text = "&TileHorizontal";
+            this.tileHorizontalToolStripMenuItem.Click += new System.EventHandler(this.tileHorizontalToolStripMenuItem_Click);
+            // 
+            // tileVerticalToolStripMenuItem
+            // 
+            this.tileVerticalToolStripMenuItem.Name = "tileVerticalToolStripMenuItem";
+            this.tileVerticalToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.tileVerticalToolStripMenuItem.Text = "&TileVertical";
+            this.tileVerticalToolStripMenuItem.Click += new System.EventHandler(this.tileVerticalToolStripMenuItem_Click);
+            // 
+            // сохранитьВPdfToolStripMenuItem
+            // 
+            this.сохранитьВPdfToolStripMenuItem.Name = "сохранитьВPdfToolStripMenuItem";
+            this.сохранитьВPdfToolStripMenuItem.Size = new System.Drawing.Size(107, 20);
+            this.сохранитьВPdfToolStripMenuItem.Text = "Со&хранить в pdf";
+            this.сохранитьВPdfToolStripMenuItem.Click += new System.EventHandler(this.saveInPdfToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -151,6 +196,11 @@
         private System.Windows.Forms.ToolStripMenuItem поискToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem делToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem проектовToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem видToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem каскадToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tileHorizontalToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tileVerticalToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem сохранитьВPdfToolStripMenuItem;
     }
 }
 

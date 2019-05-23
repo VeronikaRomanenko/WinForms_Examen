@@ -1,4 +1,6 @@
-﻿using System;
+﻿using EO.Pdf;
+using EO.Pdf.Acm;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -126,6 +128,103 @@ namespace WinForms_Examen
                 item.SaveToFiles();
             }
             File.WriteAllLines("Proekti.txt", tmp);
+        }
+
+        private void cascadeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LayoutMdi(MdiLayout.Cascade);
+        }
+
+        private void tileHorizontalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LayoutMdi(MdiLayout.TileHorizontal);
+        }
+
+        private void tileVerticalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LayoutMdi(MdiLayout.TileVertical);
+        }
+
+        private string deloVString(Delo d)
+        {
+            string tmp = d.Name;
+            tmp += ": ";
+            tmp += d.Opisanie;
+            if (d.Dedline.Year != 0001)
+            {
+                tmp += ", ";
+                tmp += d.Dedline.ToLongDateString();
+                tmp += " ";
+                tmp += d.Dedline.ToLongTimeString();
+            }
+            foreach (string str in d.tegi)
+            {
+                tmp += ", ";
+                tmp += str;
+            }
+            if (d.FileName != "")
+            {
+                tmp += ", прикрепленный файл - ";
+                tmp += d.FileName;
+            }
+            tmp += ", приоритет - ";
+            if (d.prioritet == Prioritet.Visokij)
+                tmp += "высокий";
+            else if (d.prioritet == Prioritet.Srednij)
+                tmp += "средний";
+            else
+                tmp += "низкий";
+            return tmp;
+        }
+
+        private void saveInPdfToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PdfDocument doc = new PdfDocument();
+            
+            AcmRender render = new AcmRender(doc);
+
+            foreach (Delo item in dela)
+            {               
+                AcmText text = new AcmText(deloVString(item));
+                render.Render(text);
+            }
+            foreach (Proekt item in proekti)
+            {
+                string tmp = item.Name;
+                tmp += ": ";
+                tmp += item.Opisanie;
+                if (item.Dedline.Year != 0001)
+                {
+                    tmp += ", ";
+                    tmp += item.Dedline.ToLongDateString();
+                    tmp += " ";
+                    tmp += item.Dedline.ToLongTimeString();
+                }
+                foreach (string str in item.tegi)
+                {
+                    tmp += ", ";
+                    tmp += str;
+                }
+                tmp += ", приоритет - ";
+                if (item.prioritet == Prioritet.Visokij)
+                    tmp += "высокий";
+                else if (item.prioritet == Prioritet.Srednij)
+                    tmp += "средний";
+                else
+                    tmp += "низкий";
+                tmp += ", дела:";
+                AcmText text = new AcmText(tmp);
+                render.Render(text);
+
+                foreach (Delo d in item.dela)
+                {
+                    AcmText t = new AcmText(deloVString(d));
+                    render.Render(t);
+                }
+            }
+            
+            doc.Save("pdfFiles/Список дел.pdf");
+
         }
     }
 }
